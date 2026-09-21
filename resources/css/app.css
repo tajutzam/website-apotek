@@ -1,0 +1,30 @@
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#f4f6f8] text-[#3F4254] font-sans antialiased;
+  }
+}
+
+/* Custom Scrollbar for Metronic feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f4;
+}
+::-webkit-scrollbar-thumb {
+  background: #c4c5d6;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a5b7;
+}
+
+.table-row-hover:hover {
+  background-color: #f8fafc;
+}
