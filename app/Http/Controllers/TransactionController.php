@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Medicine;
 use App\Models\Transaction;
 use App\Models\TransactionItem;
+use App\Services\ActivityLogger;
+use App\Services\CashService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -96,6 +98,33 @@ class TransactionController extends Controller
                 // Reduce stock
                 $itemData['medicine']->decrement('stock', $itemData['quantity']);
             }
+
+            // Integrasi ke Keuangan Kas (Otomatis mencatat penerimaan kas penjualan)
+            try {
+                $cashAccount = $request->payment_method === 'Cash'
+                    ? CashService::getDefaultCashAccount()
+                    : CashService::getDefaultBankAccount($request->payment_method === 'Transfer' ? 'bank' : 'e-wallet');
+
+                CashService::recordMutation(
+                    $cashAccount,
+                    'in',
+                    'penjualan',
+                    $totalAmount,
+                    "Penerimaan penjualan kasir #{$invoiceNumber} ({$request->customer_name})",
+                    Transaction::class,
+                    $transaction->id,
+                    $invoiceNumber
+                );
+            } catch (\Exception $e) {
+                // Keep transaction even if cash log fails
+            }
+
+            ActivityLogger::log(
+                'transaction',
+                'Penjualan',
+                "Transaksi kasir berhasil #{$transaction->invoice_number} ({$transaction->customer_name}) Total: Rp " . number_format($totalAmount, 0, ',', '.'),
+                ['invoice' => $transaction->invoice_number, 'total' => $totalAmount, 'items_count' => count($itemsToCreate)]
+            );
 
             return redirect()->route('transactions.show', $transaction->id)
                 ->with('success', 'Transaksi berhasil disimpan!');

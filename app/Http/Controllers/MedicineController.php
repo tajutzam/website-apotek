@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Medicine;
 use App\Models\Unit;
+use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -66,7 +67,14 @@ class MedicineController extends Controller
             'is_prescription' => ['boolean'],
         ]);
 
-        Medicine::create($validated);
+        $medicine = Medicine::create($validated);
+
+        ActivityLogger::log(
+            'create',
+            'Obat',
+            "Menambahkan data obat baru: {$medicine->name} ({$medicine->code})",
+            ['id' => $medicine->id, 'name' => $medicine->name, 'stock' => $medicine->stock]
+        );
 
         return redirect()->back()->with('success', 'Obat berhasil ditambahkan ke inventori.');
     }
@@ -88,14 +96,31 @@ class MedicineController extends Controller
             'is_prescription' => ['boolean'],
         ]);
 
+        $oldData = $medicine->toArray();
         $medicine->update($validated);
+
+        ActivityLogger::log(
+            'update',
+            'Obat',
+            "Memperbarui data obat: {$medicine->name} ({$medicine->code})",
+            ['old' => $oldData, 'new' => $validated]
+        );
 
         return redirect()->back()->with('success', 'Data obat berhasil diperbarui.');
     }
 
     public function destroy(Medicine $medicine)
     {
+        $name = $medicine->name;
+        $code = $medicine->code;
         $medicine->delete();
+
+        ActivityLogger::log(
+            'delete',
+            'Obat',
+            "Menghapus data obat: {$name} ({$code})",
+            ['code' => $code, 'name' => $name]
+        );
 
         return redirect()->back()->with('success', 'Obat berhasil dihapus dari inventori.');
     }

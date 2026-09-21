@@ -11,16 +11,30 @@ export default {
     extend: {
       colors: {
         brand: {
-          50: '#f0fdfa',
-          100: '#ccfbf1',
-          200: '#99f6e4',
-          300: '#5eead4',
-          400: '#2dd4bf',
-          500: '#0d9488', // professional pharmacy teal/emerald
-          600: '#0f766e',
-          700: '#115e59',
-          800: '#134e4a',
-          900: '#042f2e',
+          blue: {
+            50: '#eff6ff',
+            100: '#dbeafe',
+            200: '#bfdbfe',
+            300: '#93c5fd',
+            400: '#60a5fa',
+            500: '#1d4ed8',
+            600: '#1e40af', // Medikasa Primary Blue
+            700: '#1e3a8a',
+            800: '#172554',
+            900: '#0f172a',
+          },
+          green: {
+            50: '#f0fdf4',
+            100: '#dcfce7',
+            200: '#bbf7d0',
+            300: '#86efac',
+            400: '#4ade80',
+            500: '#22c55e',
+            600: '#16a34a', // Medikasa Accent Green
+            700: '#15803d',
+            800: '#166534',
+            900: '#14532d',
+          },
         },
         sidebar: {
           bg: '#1e1e2d',

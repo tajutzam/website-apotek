@@ -17,9 +17,16 @@ class Transaction extends Model
         'paid_amount',
         'change_amount',
         'payment_method',
+        'status',
+        'rejection_reason',
         'notes',
         'transaction_date',
     ];
+
+    public function saleReturns()
+    {
+        return $this->hasMany(SaleReturn::class);
+    }
 
     protected $casts = [
         'total_amount' => 'decimal:2',

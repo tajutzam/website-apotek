@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Unit;
+use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -30,7 +31,9 @@ class CategoryController extends Controller
 
         $validated['slug'] = Str::slug($validated['name']) . '-' . rand(100, 999);
 
-        Category::create($validated);
+        $category = Category::create($validated);
+
+        ActivityLogger::log('create', 'Kategori', "Menambahkan kategori: {$category->name}");
 
         return redirect()->back()->with('success', 'Kategori baru berhasil ditambahkan.');
     }
@@ -44,12 +47,17 @@ class CategoryController extends Controller
 
         $category->update($validated);
 
+        ActivityLogger::log('update', 'Kategori', "Memperbarui kategori: {$category->name}");
+
         return redirect()->back()->with('success', 'Kategori berhasil diperbarui.');
     }
 
     public function destroy(Category $category)
     {
+        $name = $category->name;
         $category->delete();
+
+        ActivityLogger::log('delete', 'Kategori', "Menghapus kategori: {$name}");
 
         return redirect()->back()->with('success', 'Kategori berhasil dihapus.');
     }
@@ -60,14 +68,19 @@ class CategoryController extends Controller
             'name' => ['required', 'string', 'max:50', 'unique:units,name'],
         ]);
 
-        Unit::create($validated);
+        $unit = Unit::create($validated);
+
+        ActivityLogger::log('create', 'Satuan', "Menambahkan satuan kemasan: {$unit->name}");
 
         return redirect()->back()->with('success', 'Satuan baru berhasil ditambahkan.');
     }
 
     public function destroyUnit(Unit $unit)
     {
+        $name = $unit->name;
         $unit->delete();
+
+        ActivityLogger::log('delete', 'Satuan', "Menghapus satuan kemasan: {$name}");
 
         return redirect()->back()->with('success', 'Satuan berhasil dihapus.');
     }
