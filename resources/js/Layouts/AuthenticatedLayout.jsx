@@ -35,7 +35,8 @@ import {
     ArrowUpRight,
     ArrowDownRight,
     PanelLeftClose,
-    PanelLeftOpen
+    PanelLeftOpen,
+    Database
 } from 'lucide-react';
 
 export default function AuthenticatedLayout({ children, title }) {
@@ -200,6 +201,14 @@ export default function AuthenticatedLayout({ children, title }) {
             title: 'Pengaturan & Audit',
             icon: ShieldCheck,
             items: [
+                ...(auth?.user?.role === 'admin' ? [
+                    {
+                        name: 'Backup & Restore DB',
+                        href: '/settings/database',
+                        icon: Database,
+                        active: currentRoute.startsWith('/settings/database'),
+                    },
+                ] : []),
                 {
                     name: 'Manajemen Pengguna',
                     href: '/users',

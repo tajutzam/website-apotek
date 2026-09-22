@@ -4,6 +4,7 @@ use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DatabaseBackupController;
 use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\MedicineController;
@@ -92,4 +93,14 @@ Route::middleware('auth')->group(function () {
 
     // Log Aktivitas (Audit Trail)
     Route::get('/activity-logs', [ActivityLogController::class, 'index'])->name('activity-logs.index');
+
+    // Pengaturan & Backup/Restore Database (Khusus Admin)
+    Route::middleware('admin')->prefix('settings')->name('settings.')->group(function () {
+        Route::get('/database', [DatabaseBackupController::class, 'index'])->name('database.index');
+        Route::get('/database/download', [DatabaseBackupController::class, 'downloadBackup'])->name('database.download');
+        Route::post('/database/create-backup', [DatabaseBackupController::class, 'createBackup'])->name('database.create-backup');
+        Route::post('/database/restore', [DatabaseBackupController::class, 'restore'])->name('database.restore');
+        Route::post('/database/restore-local', [DatabaseBackupController::class, 'restoreFromLocal'])->name('database.restore-local');
+        Route::delete('/database/backups/{filename}', [DatabaseBackupController::class, 'deleteLocalBackup'])->name('database.delete-backup');
+    });
 });
