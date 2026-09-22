@@ -1,0 +1,223 @@
+@startuml Medikasa_ERD
+!theme plain
+skinparam linetype ortho
+skinparam roundCorner 6
+
+title **MEDIKASA - Entity Relationship Diagram (ERD)**
+
+entity "users" as users {
+  * id : bigint <<PK>>
+  --
+  name : varchar(255)
+  email : varchar(255) <<Unique>>
+  role : enum('admin','apoteker','kasir')
+  phone : varchar(20)
+  password : varchar(255)
+  created_at : timestamp
+}
+
+entity "categories" as categories {
+  * id : bigint <<PK>>
+  --
+  name : varchar(100)
+  slug : varchar(120) <<Unique>>
+  description : text
+}
+
+entity "units" as units {
+  * id : bigint <<PK>>
+  --
+  name : varchar(50) <<Unique>>
+}
+
+entity "medicines" as medicines {
+  * id : bigint <<PK>>
+  --
+  code : varchar(50) <<Unique>>
+  name : varchar(255)
+  category_id : bigint <<FK>>
+  unit_id : bigint <<FK>>
+  purchase_price : decimal(15,2)
+  selling_price : decimal(15,2)
+  stock : integer
+  min_stock : integer
+  expired_date : date
+  location_rack : varchar(50)
+  is_prescription : boolean
+}
+
+entity "transactions" as transactions {
+  * id : bigint <<PK>>
+  --
+  invoice_number : varchar(100) <<Unique>>
+  user_id : bigint <<FK>>
+  customer_name : varchar(100)
+  total_amount : decimal(15,2)
+  paid_amount : decimal(15,2)
+  change_amount : decimal(15,2)
+  payment_method : varchar(50)
+  status : enum('completed','returned','rejected')
+  rejection_reason : text
+  transaction_date : timestamp
+}
+
+entity "transaction_items" as transaction_items {
+  * id : bigint <<PK>>
+  --
+  transaction_id : bigint <<FK>>
+  medicine_id : bigint <<FK>>
+  quantity : integer
+  unit_price : decimal(15,2)
+  subtotal : decimal(15,2)
+}
+
+entity "sale_returns" as sale_returns {
+  * id : bigint <<PK>>
+  --
+  return_number : varchar(100) <<Unique>>
+  transaction_id : bigint <<FK>>
+  user_id : bigint <<FK>>
+  total_refund : decimal(15,2)
+  reason : varchar(255)
+  refund_method : varchar(50)
+  return_date : timestamp
+}
+
+entity "sale_return_items" as sale_return_items {
+  * id : bigint <<PK>>
+  --
+  sale_return_id : bigint <<FK>>
+  medicine_id : bigint <<FK>>
+  quantity : integer
+  refund_price : decimal(15,2)
+  subtotal : decimal(15,2)
+  restore_stock : boolean
+}
+
+entity "stock_adjustments" as stock_adjustments {
+  * id : bigint <<PK>>
+  --
+  medicine_id : bigint <<FK>>
+  user_id : bigint <<FK>>
+  type : enum('in','out','adjustment')
+  previous_stock : integer
+  quantity : integer
+  final_stock : integer
+  reason : varchar(150)
+  reference_number : varchar(100)
+}
+
+entity "cash_accounts" as cash_accounts {
+  * id : bigint <<PK>>
+  --
+  code : varchar(50) <<Unique>>
+  name : varchar(100)
+  type : enum('cash','bank','e-wallet')
+  opening_balance : decimal(15,2)
+  current_balance : decimal(15,2)
+  is_active : boolean
+}
+
+entity "cash_books" as cash_books {
+  * id : bigint <<PK>>
+  --
+  entry_number : varchar(100) <<Unique>>
+  cash_account_id : bigint <<FK>>
+  user_id : bigint <<FK>>
+  type : enum('in','out')
+  category : varchar(100)
+  amount : decimal(15,2)
+  balance_after : decimal(15,2)
+  reference_number : varchar(100)
+  transaction_date : timestamp
+}
+
+entity "debts" as debts {
+  * id : bigint <<PK>>
+  --
+  debt_number : varchar(100) <<Unique>>
+  supplier_name : varchar(150)
+  invoice_number : varchar(100)
+  total_amount : decimal(15,2)
+  paid_amount : decimal(15,2)
+  remaining_amount : decimal(15,2)
+  due_date : date
+  status : enum('unpaid','partial','paid')
+}
+
+entity "debt_payments" as debt_payments {
+  * id : bigint <<PK>>
+  --
+  payment_number : varchar(100) <<Unique>>
+  debt_id : bigint <<FK>>
+  cash_account_id : bigint <<FK>>
+  user_id : bigint <<FK>>
+  amount : decimal(15,2)
+  payment_date : date
+}
+
+entity "receivables" as receivables {
+  * id : bigint <<PK>>
+  --
+  receivable_number : varchar(100) <<Unique>>
+  customer_name : varchar(150)
+  transaction_id : bigint <<FK>>
+  total_amount : decimal(15,2)
+  paid_amount : decimal(15,2)
+  remaining_amount : decimal(15,2)
+  due_date : date
+  status : enum('unpaid','partial','paid')
+}
+
+entity "receivable_payments" as receivable_payments {
+  * id : bigint <<PK>>
+  --
+  payment_number : varchar(100) <<Unique>>
+  receivable_id : bigint <<FK>>
+  cash_account_id : bigint <<FK>>
+  user_id : bigint <<FK>>
+  amount : decimal(15,2)
+  payment_date : date
+}
+
+entity "activity_logs" as activity_logs {
+  * id : bigint <<PK>>
+  --
+  user_id : bigint <<FK>>
+  user_name : varchar(255)
+  action : varchar(50)
+  module : varchar(50)
+  description : text
+  ip_address : varchar(50)
+  created_at : timestamp
+}
+
+' Relationships
+categories ||..o{ medicines : "category_id"
+units ||..o{ medicines : "unit_id"
+
+users ||..o{ transactions : "user_id"
+transactions ||--|{ transaction_items : "transaction_id"
+medicines ||..o{ transaction_items : "medicine_id"
+
+transactions ||..o{ sale_returns : "transaction_id"
+users ||..o{ sale_returns : "user_id"
+sale_returns ||--|{ sale_return_items : "sale_return_id"
+medicines ||..o{ sale_return_items : "medicine_id"
+
+medicines ||..o{ stock_adjustments : "medicine_id"
+users ||..o{ stock_adjustments : "user_id"
+
+cash_accounts ||--o{ cash_books : "cash_account_id"
+users ||..o{ cash_books : "user_id"
+
+debts ||--o{ debt_payments : "debt_id"
+cash_accounts ||..o{ debt_payments : "cash_account_id"
+
+receivables ||--o{ receivable_payments : "receivable_id"
+cash_accounts ||..o{ receivable_payments : "cash_account_id"
+transactions ||..o{ receivables : "transaction_id"
+
+users ||..o{ activity_logs : "user_id"
+
+@enduml

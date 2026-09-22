@@ -1,0 +1,45 @@
+@startuml Medikasa_POS_Flow
+!theme plain
+skinparam sequenceMessageAlign center
+autonumber
+
+actor "Kasir / Apoteker" as Kasir
+boundary "Halaman POS (React)" as POS
+control "TransactionController" as Controller
+control "CashService" as CashSvc
+control "ActivityLogger" as LogSvc
+database "Database (MySQL)" as DB
+
+Kasir -> POS : Pilih obat & Masukkan Qty
+Kasir -> POS : Input nominal bayar & klik Bayar
+POS -> Controller : POST /pos (items, payment_method, paid_amount)
+
+activate Controller
+Controller -> DB : DB::transaction() Mulai
+
+Controller -> DB : Cek & Lock stok obat (Medicine::lockForUpdate)
+alt Stok Kurang atau Uang Kurang
+  Controller --> POS : Gagal (Stok habis / Uang pembayaran kurang)
+else Validasi Sukses
+  Controller -> DB : Buat record Transaksi (Invoice #INV-...)
+  Controller -> DB : Simpan TransactionItems
+  Controller -> DB : Potong stok obat (Medicine->decrement)
+
+  Controller -> CashSvc : recordMutation(Kasir, 'in', 'penjualan', totalAmount)
+  activate CashSvc
+  CashSvc -> DB : Tambah saldo Akun Kas (cash_accounts)
+  CashSvc -> DB : Buat baris Buku Kas (cash_books)
+  deactivate CashSvc
+
+  Controller -> LogSvc : log('transaction', 'Penjualan', 'Transaksi kasir berhasil...')
+  activate LogSvc
+  LogSvc -> DB : Simpan catatan aktivitas (activity_logs)
+  deactivate LogSvc
+
+  Controller -> DB : DB::commit() Selesai
+  Controller --> POS : Redirect ke Halaman Struk (/transactions/{id})
+end
+deactivate Controller
+
+POS --> Kasir : Tampilkan Struk Invoice & Tombol Cetak Nota
+@enduml

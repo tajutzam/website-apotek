@@ -1,0 +1,114 @@
+@startuml Medikasa_Architecture
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam componentStyle rectangle
+skinparam roundCorner 8
+skinparam defaultFontName Arial
+
+title **MEDIKASA - System Architecture & Component Diagram**
+
+package "Client Tier (Browser)" {
+  [Single Page Application (React 19)] as SPA
+  [Inertia.js Client & Tailwind CSS] as UI
+  SPA -down-> UI
+}
+
+package "Application Tier (Laravel Framework)" #F8FAFC {
+  package "Middleware & Routing" {
+    [Web Routes (routes/web.php)] as Router
+    [Auth Middleware & CSRF] as AuthMid
+  }
+
+  package "Controllers" #EFF6FF {
+    [AuthController] as AuthCtrl
+    [DashboardController] as DashCtrl
+    [MedicineController] as MedCtrl
+    [CategoryController] as CatCtrl
+    [TransactionController] as TrxCtrl
+    [SalesController] as SalesCtrl
+    [InventoryController] as InvCtrl
+    [FinanceController] as FinCtrl
+    [ReportController] as RepCtrl
+    [UserController] as UserCtrl
+    [ActivityLogController] as LogCtrl
+  }
+
+  package "Business Services" #F0FDF4 {
+    [CashService\n(Otomasi Mutasi & Saldo Kas)] as CashSvc
+    [ActivityLogger\n(Pencatatan Audit Trail)] as LogSvc
+  }
+
+  package "Eloquent ORM / Data Layer" #F1F5F9 {
+    [User / Role] as MUser
+    [Medicine, Category, Unit] as MMedicine
+    [Transaction & Item] as MTransaction
+    [SaleReturn & Item] as MReturn
+    [StockAdjustment] as MStock
+    [CashAccount, CashBook] as MCash
+    [Debt & Receivable] as MDebt
+    [ActivityLog] as MLog
+  }
+}
+
+database "Database Tier (MySQL Database)" #FEF3C7 {
+  [users, activity_logs] as DB_Auth
+  [medicines, categories, units] as DB_Med
+  [transactions, transaction_items, sale_returns] as DB_Sales
+  [stock_adjustments] as DB_Inv
+  [cash_accounts, cash_books, debts, receivables] as DB_Fin
+}
+
+' Interactions
+UI --> Router : HTTPS / Inertia Requests
+Router --> AuthMid
+AuthMid --> AuthCtrl
+AuthMid --> DashCtrl
+AuthMid --> MedCtrl
+AuthMid --> CatCtrl
+AuthMid --> TrxCtrl
+AuthMid --> SalesCtrl
+AuthMid --> InvCtrl
+AuthMid --> FinCtrl
+AuthMid --> RepCtrl
+AuthMid --> UserCtrl
+AuthMid --> LogCtrl
+
+TrxCtrl ..> CashSvc : Catat Kas Masuk
+TrxCtrl ..> LogSvc : Log Transaksi
+SalesCtrl ..> CashSvc : Refund Kas
+SalesCtrl ..> LogSvc : Log Retur & Tolak
+InvCtrl ..> CashSvc : Potong Kas Pembelian
+InvCtrl ..> LogSvc : Log Mutasi Stok
+FinCtrl ..> CashSvc : Catat Mutasi
+MedCtrl ..> LogSvc : Log Master Obat
+UserCtrl ..> LogSvc : Log Pengguna
+
+AuthCtrl --> MUser
+DashCtrl --> MTransaction
+DashCtrl --> MMedicine
+MedCtrl --> MMedicine
+CatCtrl --> MMedicine
+TrxCtrl --> MTransaction
+TrxCtrl --> MMedicine
+SalesCtrl --> MTransaction
+SalesCtrl --> MReturn
+InvCtrl --> MStock
+InvCtrl --> MMedicine
+FinCtrl --> MCash
+FinCtrl --> MDebt
+UserCtrl --> MUser
+LogCtrl --> MLog
+
+CashSvc --> MCash
+LogSvc --> MLog
+
+MUser --> DB_Auth
+MMedicine --> DB_Med
+MTransaction --> DB_Sales
+MReturn --> DB_Sales
+MStock --> DB_Inv
+MCash --> DB_Fin
+MDebt --> DB_Fin
+MLog --> DB_Auth
+
+@enduml

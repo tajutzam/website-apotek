@@ -1,0 +1,190 @@
+<mxfile host="app.diagrams.net" modified="2026-09-21T00:00:00.000Z" agent="MEDIKASA System Architect" version="22.0.0" type="device">
+  <diagram name="MEDIKASA Feature Map" id="medikasa-feature-mapping">
+    <mxGraphModel dx="1800" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="1250" background="#F8FAFC" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ==================== HEADER / ROOT HUB ==================== -->
+        <mxCell id="root_hub" value="&lt;b style=&quot;font-size: 18px;&quot;&gt;MEDIKASA - PHARMACY POS &amp;amp; MANAGEMENT SYSTEM&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 12px; opacity: 0.9;&quot;&gt;Pemetaan Arsitektur Fitur &amp;amp; Modul Sistem Informasi Apotek Terpadu&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#1E40AF;strokeColor=#1E3A8A;fontColor=#FFFFFF;shadow=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="680" y="30" width="560" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== MODULE 1: MASTER DATA ==================== -->
+        <mxCell id="group_master" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#F0F9FF;strokeColor=#BAE6FD;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="150" width="280" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="header_master" value="&lt;b&gt;1. MASTER DATA&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#0284C7;strokeColor=#0369A1;fontColor=#FFFFFF;fontSize=13;fontStyle=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="165" width="250" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="m_sub1" value="&lt;b&gt;Katalog Obat &amp;amp; Produk&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Kode Obat (Barcode/SKU)&lt;br&gt;• Nama Obat &amp;amp; Indikasi Medis&lt;br&gt;• Harga Beli &amp;amp; Harga Jual&lt;br&gt;• Stok &amp;amp; Batas Minimum Stok&lt;br&gt;• Tanggal Kedaluwarsa (Expired)&lt;br&gt;• Lokasi Rak Simpan Fisik&lt;br&gt;• Klasifikasi Obat Resep / Bebas&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="55" y="220" width="250" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="m_sub2" value="&lt;b&gt;Kategori Obat&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• CRUD Golongan / Kategori Obat&lt;br&gt;• Auto-Slug Generator&lt;br&gt;• Deskripsi &amp;amp; Total Item Terdaftar&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="55" y="365" width="250" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="m_sub3" value="&lt;b&gt;Satuan Kemasan (Unit)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Master Satuan Obat (Strip, Botol, Tablet, Box, Tube, Sachet, Ampul)&lt;br&gt;• Perhitungan Relasi Unit Produk&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="55" y="455" width="250" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="m_sub4" value="&lt;b&gt;Pencarian &amp;amp; Filter Master&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Live Search Nama &amp;amp; Rak Obat&lt;br&gt;• Filter Kategori &amp;amp; Status Stok&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="55" y="555" width="250" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== MODULE 2: PENJUALAN & KASIR (POS) ==================== -->
+        <mxCell id="group_sales" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#F0FDF4;strokeColor=#BBF7D0;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="150" width="280" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="header_sales" value="&lt;b&gt;2. PENJUALAN &amp;amp; KASIR&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#16A34A;strokeColor=#15803D;fontColor=#FFFFFF;fontSize=13;fontStyle=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="365" y="165" width="250" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s_sub1" value="&lt;b&gt;Kasir Cepat POS (Point of Sale)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Katalog Kasir &amp;amp; Live Quick Search&lt;br&gt;• Filter Cepat Badge Kategori&lt;br&gt;• Keranjang Belanja Dinamis&lt;br&gt;• Multi-Metode Bayar (Cash, QRIS, Transfer, Debit)&lt;br&gt;• Quick Cash Suggestion &amp;amp; Kembalian&lt;br&gt;• Validasi &amp;amp; Pemotongan Stok Lock&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="365" y="220" width="250" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s_sub2" value="&lt;b&gt;Daftar Penjualan &amp;amp; Struk&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Riwayat Lengkap Seluruh Invoice&lt;br&gt;• Filter Status (Berhasil, Retur, Tolak)&lt;br&gt;• Struk Digital &amp;amp; Cetak Thermal/Nota&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="365" y="355" width="250" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s_sub3" value="&lt;b&gt;Retur Penjualan Pasien&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Input Retur Berdasarkan No. Invoice&lt;br&gt;• Pilihan Refund (Cash, Transfer, Voucher)&lt;br&gt;• Opsi Pengembalian Stok Fisik Otomatis&lt;br&gt;• Terhubung ke Jurnal Kas Keluar&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="365" y="450" width="250" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s_sub4" value="&lt;b&gt;Penjualan Tertolak / Batal&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Pembatalan Transaksi dengan Alasan&lt;br&gt;• Otomatis Rollback Stok &amp;amp; Pengembalian Kas&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="365" y="560" width="250" height="75" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== MODULE 3: PERSEDIAAN & STOK ==================== -->
+        <mxCell id="group_inv" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#F0FDFA;strokeColor=#99F6E4;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="150" width="280" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="header_inv" value="&lt;b&gt;3. PERSEDIAAN &amp;amp; STOK&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#0D9488;strokeColor=#0F766E;fontColor=#FFFFFF;fontSize=13;fontStyle=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="675" y="165" width="250" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="i_sub1" value="&lt;b&gt;Status Persediaan &amp;amp; Aset&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Monitoring Kuantitas Stok Fisik Real-time&lt;br&gt;• Kalkulasi Total Nilai Aset Stok (Rp)&lt;br&gt;• Deteksi Stok Aman, Menipis, dan Habis&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="675" y="220" width="250" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="i_sub2" value="&lt;b&gt;Barang Masuk / Restock Supplier&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Input Penerimaan Barang dari Distributor&lt;br&gt;• Catat Nomor Faktur / Surat Jalan PBF&lt;br&gt;• &lt;b&gt;Opsi Bayar Tunai &amp;amp; Potong Saldo Kas&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="675" y="320" width="250" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="i_sub3" value="&lt;b&gt;Barang Keluar &amp;amp; Pemusnahan&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Pencatatan Obat Rusak, Pecah, Hilang&lt;br&gt;• Pengurangan Stok dengan Log Alasan&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="675" y="425" width="250" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="i_sub4" value="&lt;b&gt;Stock Opname &amp;amp; Peringatan Expired&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Penyesuaian Stok Fisik Riil vs Sistem&lt;br&gt;• Peringatan Obat Expired (&amp;le; 6 Bulan)&lt;br&gt;• Rekomendasi Tindakan Retur Supplier&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="675" y="515" width="250" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== MODULE 4: KEUANGAN & KAS ==================== -->
+        <mxCell id="group_fin" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#EFF6FF;strokeColor=#BFDBFE;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="970" y="150" width="280" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="header_fin" value="&lt;b&gt;4. KEUANGAN &amp;amp; KAS&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#1D4ED8;strokeColor=#1E40AF;fontColor=#FFFFFF;fontSize=13;fontStyle=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="985" y="165" width="250" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="f_sub1" value="&lt;b&gt;Daftar Akun Kas &amp;amp; Bank&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Akun Kas Tunai Kasir Utama&lt;br&gt;• Rekening Bank Operasional Apotek&lt;br&gt;• Dompet Digital / QRIS Settlement&lt;br&gt;• Monitoring Total Saldo Likuiditas Apotek&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="985" y="220" width="250" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="f_sub2" value="&lt;b&gt;Buku Kas &amp;amp; Jurnal Mutasi&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Catatan Arus Kas Masuk &amp;amp; Keluar Real-time&lt;br&gt;• Otomasi dari Penjualan, Retur, &amp;amp; Restock&lt;br&gt;• Input Biaya Operasional (Listrik, Gaji, dll)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="985" y="325" width="250" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="f_sub3" value="&lt;b&gt;Utang Usaha (Supplier PBF)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Tagihan Pembelian Obat Tempo / Faktur&lt;br&gt;• Jadwal Jatuh Tempo &amp;amp; Status Pembayaran&lt;br&gt;• Pelunasan via Kas/Bank Terintegrasi&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="985" y="425" width="250" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="f_sub4" value="&lt;b&gt;Piutang Usaha (Pasien / Bon)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Tagihan Piutang Bon Pasien / Resep Klinik&lt;br&gt;• Status Belum Lunas, Sebagian, &amp;amp; Lunas&lt;br&gt;• Penerimaan Bayar Masuk ke Akun Kas&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="985" y="525" width="250" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== MODULE 5: LAPORAN & ANALITIK ==================== -->
+        <mxCell id="group_rep" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFBEB;strokeColor=#FDE68A;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="150" width="280" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="header_rep" value="&lt;b&gt;5. LAPORAN &amp;amp; ANALITIK&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#D97706;strokeColor=#B45309;fontColor=#FFFFFF;fontSize=13;fontStyle=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1295" y="165" width="250" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_sub1" value="&lt;b&gt;Executive Dashboard&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• KPI Ringkasan Omset Harian &amp;amp; Bulanan&lt;br&gt;• Grafik Interaktif Tren Penjualan 7 Hari&lt;br&gt;• Toggle Grafik Omset (Rp) vs Volume Trx&lt;br&gt;• 5 Obat Terlaris (Top Selling Products)&lt;br&gt;• Jam Digital Real-time dengan Detik&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1295" y="220" width="250" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_sub2" value="&lt;b&gt;Laporan Rekap Penjualan&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Filter Rentang Tanggal Kustom&lt;br&gt;• Filter Metode Pembayaran&lt;br&gt;• 10 Obat Terlaris Periode Terpilih&lt;br&gt;• Grand Total Omset &amp;amp; Total Item Terjual&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1295" y="345" width="250" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_sub3" value="&lt;b&gt;Laporan Stok &amp;amp; Inventori&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Rekapitulasi Sisa Stok Seluruh Obat&lt;br&gt;• Status Stok Aman, Kritis, &amp;amp; Expired&lt;br&gt;• Penelusuran Lokasi Rak Obat&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1295" y="455" width="250" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_sub4" value="&lt;b&gt;Cetak Laporan / Export PDF&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Template Siap Cetak Khusus Print/PDF&lt;br&gt;• Format Resmi Manajemen Apotek&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1295" y="555" width="250" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== MODULE 6: PENGGUNA & AUDIT ==================== -->
+        <mxCell id="group_sys" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FAF5FF;strokeColor=#E9D5FF;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1590" y="150" width="280" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="header_sys" value="&lt;b&gt;6. PENGGUNA &amp;amp; AUDIT TRAIL&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#7C3AED;strokeColor=#6D28D9;fontColor=#FFFFFF;fontSize=13;fontStyle=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1605" y="165" width="250" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="u_sub1" value="&lt;b&gt;Otentikasi &amp;amp; Hak Akses Role&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Login Sistem (Email &amp;amp; Password Enkripsi)&lt;br&gt;• Role-Based Access Control:&lt;br&gt;  - &lt;b&gt;Admin&lt;/b&gt;: Akses Penuh ke Semua Fitur&lt;br&gt;  - &lt;b&gt;Apoteker&lt;/b&gt;: Master Obat &amp;amp; Stok&lt;br&gt;  - &lt;b&gt;Kasir&lt;/b&gt;: Transaksi Penjualan &amp;amp; POS&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1605" y="220" width="250" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="u_sub2" value="&lt;b&gt;Manajemen Pengguna&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Pendaftaran Akun Petugas Baru&lt;br&gt;• Edit Profil, Email, HP, &amp;amp; Password&lt;br&gt;• Proteksi Anti-Hapus Akun Sendiri&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1605" y="345" width="250" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="u_sub3" value="&lt;b&gt;Audit Trail / Log Aktivitas&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Rekam Jejak Otomatis Tiap Aksi&lt;br&gt;  (Create, Update, Delete, Transaksi, Mutasi, Login)&lt;br&gt;• Pencatatan Timestamp, Petugas, &amp;amp; IP&lt;br&gt;• Filter Log berdasarkan Modul &amp;amp; Tanggal&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1605" y="445" width="250" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="u_sub4" value="&lt;b&gt;UI &amp;amp; Navigasi Fleksibel&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px; color: #475569;&quot;&gt;• Clean White Theme (Logo MEDIKASA)&lt;br&gt;• Sidebar Minimize (Hanya Icon)&lt;br&gt;• Group Accordion Menu Terorganisir&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#CBD5E1;align=left;spacingLeft=10;fontSize=11;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1605" y="570" width="250" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== CONNECTORS FROM ROOT HUB TO MODULES ==================== -->
+        <mxCell id="edge1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0284C7;strokeWidth=2;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="root_hub" target="header_master">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16A34A;strokeWidth=2;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="root_hub" target="header_sales">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0D9488;strokeWidth=2;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="root_hub" target="header_inv">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D4ED8;strokeWidth=2;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="root_hub" target="header_fin">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D97706;strokeWidth=2;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="root_hub" target="header_rep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7C3AED;strokeWidth=2;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="root_hub" target="header_sys">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== CROSS-MODULE INTEGRATION FLOWS (BOTTOM) ==================== -->
+        <mxCell id="integ_box" value="&lt;b&gt;ALUR INTEGRASI OTOMATIS ANTAR MODUL (CORE BUSINESS LOGIC)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 11px; color: #334155;&quot;&gt;• &lt;b&gt;Penjualan Kasir POS&lt;/b&gt; ➔ Otomatis memotong &lt;b&gt;Stok Persediaan&lt;/b&gt; + Mencatat kas masuk di &lt;b&gt;Buku Kas Keuangan&lt;/b&gt; + Mencatat jejak di &lt;b&gt;Log Aktivitas&lt;/b&gt;&lt;br&gt;• &lt;b&gt;Restock Barang Masuk&lt;/b&gt; ➔ Menambah &lt;b&gt;Stok Obat&lt;/b&gt; + Dapat langsung memotong saldo kas tunai/bank atau dicatat sebagai &lt;b&gt;Utang Usaha Supplier&lt;/b&gt;&lt;br&gt;• &lt;b&gt;Retur / Tolak Penjualan&lt;/b&gt; ➔ Memulihkan kuantitas &lt;b&gt;Stok Fisik Obat&lt;/b&gt; + Mengeluarkan refund dana pada &lt;b&gt;Akun Kas&lt;/b&gt;&lt;br&gt;• &lt;b&gt;Pelunasan Utang / Piutang&lt;/b&gt; ➔ Mengurangi saldo utang/piutang dan mencatat mutasi kas masuk/keluar secara real-time&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=#FFFFFF;strokeColor=#0F172A;strokeWidth=1.5;align=left;spacingLeft=20;fontSize=12;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="700" width="1830" height="120" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
